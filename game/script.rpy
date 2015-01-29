@@ -115,51 +115,67 @@ label choice:
             with hpunch
             k "For real? I'm up for an adventure too! Let's do this!"
             "Have I made a mistake...?"
-            jump end
+            jump forest
 
 label school:
     scene bg school
     with fade
-    show k sad at charcenter
-    with dissolve
     $ school_studying = True
 
     if supplies_shopping:
-    	if programming_book:
-    		pov "Well, I will be able to study some chapters of the {i}programming book{/i} I bought today. It seems to be pretty high level stuff."
-    		k "You are a smart guy, so you'll be done with it in no time."
-    		pov "Thanks, man."
-    	elif backpack:
-    		pov "It was a nice idea to buy the {i}backpack{/i}, we were able to carry the food here easely."
-    		show k happy at charcenter
-    		k "Very good indeed! Pass me some of that, all the studying is making me hungry."
-    		if fruits or nuts:
-    			k "Well, that was a very healthy snack."
-    			pov "Thus, the best one."
-    		else:
-    			show k sad at charcenter
-    			k "That was good, but I think I ate a bit more than what I should."
-    			pov "You didn't eat a {i}bit{/i} more, you ate everything we bought!"
-    			show k angry at charcenter
-    			with hpunch
-    			k "Hey! You ate too!"
-    			pov "But not as much as you... Nevermind, it's not a big deal."
+        show k neutral at charcenter
+        with dissolve
 
-    scene bg school
-    with dissolve
-    show k sad at charcenter
-    with dissolve
-    k "That was a lot of studying, now I'm tired."
-    pov "You actually did a good job today, Kim!"
+        if programming_book:
+            pov "Well, I will be able to study some chapters of the {i}programming book{/i} I bought today. It seems to be pretty high level stuff."
+            k "You are a smart guy, so you'll be done with it in no time."
+            pov "Thanks, man."
+        elif backpack:
+            pov "It was a nice idea to buy the {i}backpack{/i}, we were able to carry the food here easely."
+            show k happy at charcenter
+            k "Very good indeed! Pass me some of that, all the studying is making me hungry."
+            if fruits or nuts:
+                k "Well, that was a very healthy snack."
+                pov "Thus, the best one."
+            else:
+                show k sad at charcenter
+                k "That was good, but I think I ate a bit more than what I should."
+                pov "You didn't eat a {i}bit{/i} more, you ate everything we bought!"
+                show k angry at charcenter
+                with hpunch
+                k "Hey! You ate too!"
+                pov "But not as much as you... Nevermind, it's not a big deal."
+        scene bg school
+        with fade
 
-    show k happy at charcenter
-    k "Sure did, right? Thanks for the help, I think I can aim for a B+ on the midterm now."
-    pov "Why not aim for an A?" 
+    if forest_adventure:
+        show k sad at charcenter
+        with dissolve
+        k "*sigh*"
+        "Our little adventure in the forest must have exhausted him. He was so tired he didn't concentrate enough in studying..."
+        pov "Don't worry, we all have our days."
+        k "Yeah."
+        scene bg school
+        with fade
+    else:   
+        show k sad at charcenter
+        with dissolve
+        k "That was a lot of studying, now I'm tired."
+        pov "You actually did a good job today, Kim!"
+
+        show k happy at charcenter
+        k "Sure did, right? Thanks for the help, I think I can aim for a B+ on the midterm now."
+        pov "Why not aim for an A?" 
+
+        show k neutral at charcenter
+        k "Too much stress man, you know me."
+        "Sure I do."
+
+        scene bg school
+        with fade
 
     show k neutral at charcenter
-    k "Too much stress man, you know me."
-    "Sure I do."
-
+    with dissolve
     if not forest_adventure and not supplies_shopping:
         pov "Well, the study went so well we actually have time to do more stuff."
         show k happy at charcenter 
@@ -182,14 +198,21 @@ label street:
 
     menu:
         "Programming book":
-            pov "An interesting {i}programming{/i} book I'd like to study later."
+            $ programming_book = True
+            pov "An interesting {i}programming book{/i} I'd like to study later."
             k "Right, you want to program games."
         "New backpack":
+            $ backpack = True
             pov "I bought a {i}new backpack{/i}."
             k "Good choice. Your old one is rather... well, old."
         "Surviving kit for dummies":
-            pov "There was a {i}surviving kit for dummies{/i} and somehow I have a hunch it might come in handy."
-            k "Of course! Now we are totally prepared for a zombie apocalypse."
+            $ surviving_kit = True
+            if forest_adventure:
+                pov "I found a {i}surviving kit for dummies{/i} at the tools section. It has a compass, along with other things. I think it'll help us a lot next time we go for another \"adventure\"."
+                k "Well thought. Next time we'll actually make some progress."
+            else:
+                pov "There was a {i}surviving kit for dummies{/i} and somehow I have a hunch it might come in handy."
+                k "Of course! Now we are totally prepared for a zombie apocalypse."
     
     show k happy at charcenter
     with dissolve
@@ -215,17 +238,17 @@ label street:
 
     if school_studying:
         if fruits or nuts:
-        	$ chips = True
-    	    pov "Like I said, you did a great job studying today. So, I'll make an exception and buy some chips for you today."
-    	    show k happy at charcenter
-    	    k "Aww, thanks pops!"
-    	    "That kind of did sound like a dad talking..."
-    	else:
-    		pov "I did well today in my studies, so I'll reward myself with some..."
-    		menu:
-    		    "Organic fruits and water":
-    		        $ fruits = True
-    		    "Nuts and juice":
+            $ chips = True
+            pov "Like I said, you did a great job studying today. So, I'll make an exception and buy some chips for you today."
+            show k happy at charcenter
+            k "Aww, thanks pops!"
+            "That kind of did sound like a dad talking..."
+        else:
+            pov "I did well today in my studies, so I'll reward myself with some..."
+            menu:
+                "Organic fruits and water":
+                    $ fruits = True
+                "Nuts and juice":
                     $ nuts = True
             k "Best excuse I've heard for self-indulgence."
             pov "Shh!"
@@ -242,13 +265,33 @@ label street:
         jump end
 
 label forest:
-    return
+    scene bg forest
+    with fade
+    show k happy at charcenter
+    with dissolve
+    $ forest_adventure = True
+    "Under construction."
+    
+    if not forest_adventure and not school_studying:
+        pov "Well, we still have some free time to do more stuff."
+        show k happy at charcenter 
+        with hpunch
+        k "Awesome! What would you like to do?"
+        jump choice
+    else:
+        pov "I think it's enough for today. Let's go back to our room."
+        k "Alright."
+        jump end
 
 label girl:
     "Coming soon."
-    jump end
+    return
 
 label end:
+    scene bg dorm2 
+    with fade
+    show k neutral at charcenter
+    with dissolve
     "That's it for now. See you soon."
     return
 

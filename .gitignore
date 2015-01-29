@@ -2,3 +2,4 @@ errors.txt
 tmp/*
 log.txt
 game/saves/
+traceback.txt

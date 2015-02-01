@@ -1,9 +1,9 @@
 How to run
 
-- Install (http://www.renpy.org/latest.html "Ren'py").
+- Install [Ren'py](http://www.renpy.org/latest.html).
 - Run Ren'py and change the project directory in the Preferences window to the folder holding the game.
 - Launch game.
 
 Credits
 
-Art - (http://konett.deviantart.com/ "Konett")
+Art - [Konett](http://konett.deviantart.com/)

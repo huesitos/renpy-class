@@ -6,12 +6,9 @@
 # Declare characters used by this game.
 # define e = Character('Eileen', color="#c8ffc8")
 init:
-    $ n = Character('Nicole', color="#c8ffc8")
-    $ j = Character('Javier', color="#c8ffc8")
-    $ k = Character('Kim', color="#ffc8ff")
-    $ b = Character('Betsy', color="#ffc8ff")
-    $ pov = None
-    $ r = None
+    define pov = Character('[povname]', color="#c8ffc8")
+    define k = Character('Kim', color="#ffc8ff")
+    define b = Character('Betsy', color="#ffc8ff")
 
     # Character sprites
     image k happy = "resources/leo/leo_happy.png"
@@ -39,23 +36,34 @@ init:
     image bg street = "resources/bg/street.png"
     image bg forest_house = "resources/bg/forest-building-sunset.jpg"
 
-    # Activities
-    $ school_studying = False
-    $ school_studying_success = False
-    $ supplies_shopping = False
-    $ forest_adventure = False
-    $ forest_house = False
-    $ position = [0,0]
+    python:
+        # Activities
+        school_studying = False
+        school_studying_success = False
+        supplies_shopping = False
+        forest_adventure = False
+        forest_house = False
+        position = [0,0]
+        house_position = (2,2)
 
-    # Item bought
-    $ programming_book = False
-    $ backpack = False
-    $ survival_kit = False
+        # Item bought
+        programming_book = False
+        backpack = False
+        survival_kit = False
 
-    # Snack bought
-    $ fruits = False
-    $ chips = False
-    $ nuts = False
+        # Snack bought
+        fruits = False
+        chips = False
+        nuts = False
+
+        povname = ""
+        def ask_name(default):
+            global povname
+            povname = renpy.input("What is your name?")
+            povname = povname.strip()
+
+            if not povname:
+                povname = default
 
 label start:
     scene bg dorm1 
@@ -64,15 +72,15 @@ label start:
     "Are you a boy or a girl?"
     menu:
         "Boy":
-            $ pov = j
+            $ ask_name("Javier")
             jump boy
         "Girl":
-            $ pov = n
+            $ ask_name("Nicole")
             jump girl
 
 label boy:
     "You wake up to the sunrise, and just like everyday, you grab your towel and head towards the door with the intention to take a shower."
-    "Rommate" "Hold it there!"
+    "Roommate" "[povname], hold it there!"
     "His loud call surprises you, and you look back at him with a frown."
 
     pov "What's up? I'm going to take a bath."
@@ -310,6 +318,7 @@ label forest:
 label explore:
     menu:
         "Up":
+            
             show k neutral at charcenter
             k "That doesn't make sense..."
             "He's right..."
@@ -330,14 +339,14 @@ label explore:
                 jump explore
             else:
                 $ position[1] += 1
-            if position == [2,2]:
+            if position >= [2,2]:
                 jump forest_house
             else:
                 show k happy at charcenter
                 k "Alright, now where to?"
                 jump explore
         "To the right":
-            if position[0] == 2:
+            if position[0] >= 2:
                 show k neutral at charcenter
                 k "I don't think that's the right way..."
                 "He's right..."

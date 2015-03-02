@@ -240,7 +240,6 @@ label forest:
 label explore:
     menu:
         "Up":
-            
             show k neutral at charcenter
             k "That doesn't make sense..."
             "He's right..."

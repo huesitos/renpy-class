@@ -120,9 +120,6 @@ label street:
     show k neutral at charcenter
     with dissolve
     $ supplies_shopping = True
-
-    # Scene where you compete for money and then they do a riddle game
-    # Main char forgot money.
     
     k "I bought my notebooks. What did you buy?"
 

@@ -33,6 +33,7 @@ init:
 
 # The game starts here.
 label start:
+    play music "resources/bg_music.mp3"
     scene bg black
     "Lousy guy" "Hello there!"
     "Lousy guy" "What's my name you ask? I am [charname]."

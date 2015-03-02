@@ -55,10 +55,8 @@ target/
 
 # Ren'Py
 errors.txt
-tmp/*
+*/tmp/*
 log.txt
-game/saves/
+*/game/saves/
 traceback.txt
 project.json
-
-#

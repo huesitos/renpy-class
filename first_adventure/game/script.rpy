@@ -1,8 +1,5 @@
 ﻿# You can place the script of your game in this file.
 
-# Declare images below this line, using the image statement.
-# eg. image eileen happy = "eileen_happy.png"
-
 init:
     # Declare characters used by this game.
     $ charname = 'Sam'
@@ -79,11 +76,11 @@ label gamecenter:
 
     menu:
         "Smash Brothers":
-            s "I see you like fighting games. That seems like fun. May the best man win!"
+            s "I see you like fighting games. That seems like fun. May the best player win!"
             $ game = "Smash Brothers"
             $ gift = "Kirby figurine"
         "Mario Party":
-            s "So you like party games! Sounds like we're going to have some good laughs. May the best man win!"
+            s "So you like party games! Sounds like we're going to have some good laughs. May the best player win!"
             $ game = "Mario Party"
             $ gift = "Mario Star"
         "League of Legends":
@@ -91,11 +88,13 @@ label gamecenter:
             $ game = "League of Legends"
             $ gift = "Teemo hat"
         "Age of Empires":
-            s "A real time strategy, and old school too! I feel nostalgia now. May the best man win!"
+            s "A real time strategy, and old school too! I feel nostalgia now. May the best player win!"
             $ game = "Age of Empires"
             $ gift = "Cathedral wonder"
 
     # After playing
+    scene bg gamecenter
+    with fade
     show s happy at charcenter
     with dissolve
     s "That was lots of fun! Let's come back again another day. It's getting late... maybe we should go back to CoderDojoChi place."
@@ -111,12 +110,14 @@ label library:
     show s happy at charcenter
     with hpunch
     s "Look at all the books we can read here. I wish I could live long enough to read them all! What are you going to read?"
-    $gift = renpy.input("Book name:")
-    $gift = gift.strip()
+    $ gift = renpy.input("Book name:")
+    $ gift = gift.strip()
     s "That sounds nice, I'll add it to my books to read list. Well, we have to be quiet here, so let's skip the talk and start the reading!"
 
     # After reading
-    show s happy at charcenter
+    scene bg library
+    with fade
+    show s neutral at charcenter
     with dissolve
     s "Well, time sure flies when you are having fun! It's about time we head back to CoderDojoChi place."
     jump end

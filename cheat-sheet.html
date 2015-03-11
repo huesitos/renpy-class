@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ren'Py Cheat Sheet</title>
+    <style type="text/css">
+        body { margin: 0 50px; font-size: 1.5em; line-height: 1.5; font-family: Garamond; }
+        p { margin: 0; }
+        .tag:before { content: "<"; }
+        .tag:after { content: ">"; }
+        dt { font-weight: bold; }
+        dl { text-align: justify;  }
+        .definition { margin: 15px 0 0; }
+        .example { margin: 1em;  background: #eee;  padding: 1em;  width: 70%; }
+        .example ol { width: 90%; }
+        .example li { padding-left: 1em; }
+        .example li.tab { padding-left: 3em; }
+        .example li.tab-tab { padding-left: 6em; }
+    </style>
+</head>
+<body>
+    <h1>Ren'Py Cheat Sheet</h1>
+    <h2>Ren'Py scripting language</h2>
+    <dl>
+        <div class="definition">
+            <dt>init</dt>
+            <dd>block of script code for defining all the visual novel/simulation elements like characters, images, variables, positions.</dd>
+        </div>
+        <div class="example">
+            <ol>
+                <li>init:</li>
+                <li class="tab">define s = Character("Sam", color="#c8ffc8")</li>
+            </ol>
+        </div>
+
+        <div class="definition">
+            <dt>define</dt>
+            <dd>defines a character tag with a name and a color in hexadecimal for their name label</dd>
+        </div>
+
+        <div class="definition">
+            <dt>image <span class="tag">tag</span> <span class="tag">identifier</span></dt>
+            <dd>declare an image with a tag and an identifier word</dd>
+        </div>
+        <div class="example">
+            <ol>
+                <li>image amy happy = "resources/amy_happy.png"</li>
+                <li>image background forest = "resources/background_forest.png"</li>
+            </ol>
+        </div>
+
+        <div class="definition">
+            <dt>Position</dt>
+            <dd>defines a point in screen that can be used to position an image</dd>
+        </div>
+        <div class="example">
+            <ol>
+                <li>$ charcenter = Position(xpos=0.5, xanchor=0.5, ypos=0.6, yanchor=0.5)</li>
+            </ol>
+        </div>
+
+        <div class="definition">
+            <dt>label</dt>
+            <dd>marks the start of a section of the vn. Normally represents a scene. Is common practice to name the first scene as label start</dd>
+        </div>
+
+        <div class="definition">
+            <dt>play</dt>
+            <dd>reproduces music or a sound effect. </dd>
+        </div>
+        <div class="example">
+            <ol>
+                <li>play music - plays a soundtrackplay sound - plays a sound effect</li>
+                <li>play music "resources/bg_music.mp3"</li>
+            </ol>
+        </div>
+
+        <div class="definition">
+            <dt>scene <span class="tag">tag</span> <span class="tag">identifier</span></dt>
+            <dd>draws a background using the image specified in the identifier</dd>
+        </div>
+        <div class="example">
+            <ol>
+                <li>scene bg coderdojochi</li>
+            </ol>
+        </div>
+
+        <div class="definition">
+            <dt>show <span class="tag">what</span> at <span class="tag">where</span></dt>
+            <dd>draws an image at a specific location. <span class="tag">what</span> is a <span class="tag">tag</span> <span class="tag">identifier</span> combination, and at is a Position</dd>
+        </div>
+        <div class="example">
+            <ol>
+                <li>show s happy at charcenter</li>
+            </ol>
+        </div>
+
+        <div class="definition">
+            <dt>with <span class="tag">transition</span></dt>
+            <dd>used in combination with show or scene makes the image appear with the specified transition</dd>
+        </div>
+        <div class="example">
+            <ol>
+                <li>scene bg gamecenter</li>
+                <li>with fade</li>
+            </ol>
+        </div>
+
+        <div class="definition">
+            <dt>menu</dt>
+            <dd>displays a menu of options for the player to pick. Each option has a different outcome</dd>
+        </div>
+        <div class="example">
+            <ol>
+                <li>menu:</li>
+                <li class="tab">"Smash Brothers":</li>
+                <li class="tab-tab">s "I see you like fighting games. That seems like fun. May the best man win!"</li>
+                <li class="tab">"Mario Party":</li>
+                <li class="tab-tab">s "So you like party games! Sounds like we're going to have some good laughs. May the best man win!"</li>
+            </ol>
+        </div>
+
+        <div class="definition">
+            <dt>jump</dt>
+            <dd>moves from scene to scene (labels)</dd>
+        </div>
+        <div class="example">
+            <ol>
+                <li>jump library</li>
+            </ol>
+        </div>
+
+        <div class="definition">
+            <dt>return</dt>
+            <dd>goes from a scene back to a previous scene where the jump occured. Inside the first label (label start) scene it ends the game</dd>
+        </div> 
+    </dl>
+    <h2>Python code</h2>
+    <dl>
+        <div class="definition">
+            <dt>python</dt>
+            <dd>marks the beginning of a block with Python code</dd>
+        </div>
+        <div class="example">
+            <ol>
+                <li>python:</li>
+                <li class="tab">gamecenter = False</li>
+                <li class="tab">game = ''</li>
+            </ol>
+        </div>
+
+        <div class="definition">
+            <dt>$</dt>
+            <dd>marks a line as a Python code</dd>
+        </div>
+        <div class="example">
+            <ol>
+                <li>$ game = "Mario Party"</li>
+            </ol>
+        </div>
+
+        <div class="definition">
+            <dt>if/elif/else</dt>
+            <dd>used to change the flow of the story based on the validity of different elements</dd>
+        </div>
+        <div class="example">
+            <ol>
+                <li>if gamecenter:</li>
+                <li class="tab">s "You seemed to enjoy the {i}[game]{/i} game a lot, so I figured you'd like this {b}[gift]{/b}."</li>
+                <li>else:</li>
+                <li class="tab">s "I saw you were really into that {b}[gift]{/b} book, so I got you a copy from the library bookstore."</li>
+            </ol>
+        </div>
+    </dl>
+</body>
+</html>

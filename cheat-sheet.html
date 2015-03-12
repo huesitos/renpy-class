@@ -10,11 +10,10 @@
         dt { font-weight: bold; }
         dl { text-align: justify;  }
         .definition { margin: 15px 0 0; }
-        .example { margin: 1em;  background: #eee;  padding: 1em;  width: 70%; }
-        .example ol { width: 90%; }
-        .example li { padding-left: 1em; }
-        .example li.tab { padding-left: 3em; }
-        .example li.tab-tab { padding-left: 6em; }
+        .example { margin: 1em;  background: #eee;  padding: 1em;  width: 70%; text-align: left; }
+        .example ol { list-style: none; }
+        .example li.tab { padding-left: 2em; }
+        .example li.tab-tab { padding-left: 4em; }
     </style>
 </head>
 <body>
@@ -130,12 +129,55 @@
         </div>
 
         <div class="definition">
+            <dt>text as dialog or narration</dt>
+            <dd>any text inside double quotes will be printed on screen as a narration. To make a character say it, use the character <span class="tag">tag</span> before the text.</dd>
+        </div>
+        <div class="example">
+            <ol>
+                <li>"Everything started on a rainy day..."</li>
+                <li>anne "I'm so bored! Let's do something fun Carly!"</li>
+            </ol>
+        </div>
+
+        <div class="definition">
+            <dt>text interpolation</dt>
+            <dd>inserts the value of a variable inside the text</dd>
+        </div>
+        <div class="example">
+            <ol>
+                <li>$ points = 5</li>
+                <li>jess "I only have [points] points!"</li>
+            </ol>
+        </div>
+
+        <div class="definition">
+            <dt>text style tags</dt>
+            <dd>
+                style parts of the text as specified by the tag. Some include: 
+                <ul>
+                    <li>Italics: {i}{/i}</li>
+                    <li>Bold: {b}{/b}</li>
+                    <li>Underline: {u}{/u}</li>
+                    <li>Strikethrough: {s}{/s}</li>
+                    <li>Color: {color=#fff}{/color}</li>
+                </ul>
+            </dd>
+        </div>
+        <div class="example">
+            <ol>
+                <li>s "{i}This will be printed in italics.{/i}"</li>
+                <li>s "{b}This will be bold.{/b}"</li>
+                <li>s "{u}This will be underlined.{/u}"</li>
+                <li>s "{s}This will draw a line through the text.{/s}"</li>
+                <li>s "{color=#eee}This will make the text color change to gray.{/color}"</li>
+            </ol>
+        </div>        
+
+        <div class="definition">
             <dt>return</dt>
             <dd>goes from a scene back to a previous scene where the jump occured. Inside the first label (label start) scene it ends the game</dd>
-        </div> 
-    </dl>
-    <h2>Python code</h2>
-    <dl>
+        </div>
+
         <div class="definition">
             <dt>python</dt>
             <dd>marks the beginning of a block with Python code</dd>
@@ -148,6 +190,9 @@
             </ol>
         </div>
 
+    </dl>
+    <h2>Python code</h2>
+    <dl>
         <div class="definition">
             <dt>$</dt>
             <dd>marks a line as a Python code</dd>

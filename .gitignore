@@ -60,3 +60,6 @@ log.txt
 */game/saves/
 traceback.txt
 project.json
+*.rpyc
+*.pyc
+*.rpyb
